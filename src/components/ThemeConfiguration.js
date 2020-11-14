@@ -30,20 +30,21 @@ class ThemeConfiguration extends Component {
     };
   }
 
+  renderConfigurationItem({ id, name, expression}) {
+    return <ConfigurationItem
+    name={name}
+    id={id}
+    expression={expression}
+    valueOf={this.valueOf.bind(this)}
+    update={this.updateConfigurationItem()}
+      />
+  }
+
   render() {
     return (
         <div>
-        {
-          this.state.items.map(({ id, name, expression}) => <ConfigurationItem
-                               name={name}
-                               id={id}
-                               expression={expression}
-                               valueOf={this.valueOf.bind(this)}
-                               update={this.updateConfigurationItem()}
-                               />)
-        }
-        
-      </div>
+        {this.state.items.map(this.renderConfigurationItem.bind(this))}
+        </div>
     );
   }
 }
