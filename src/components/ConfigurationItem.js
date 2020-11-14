@@ -25,12 +25,16 @@ class ConfigurationItem extends Component {
     return expression.replace(/{([^}]*)}/g, (id) => valueOf(id.replace(/({|})/g, '')));
   }
 
+  updateValue() {
+    this.props.update.value(this.props.id, this.state.newValue);
+  }
+
   renderEditor() {
     if (this.state.editMode) {
       return <div>
-        <input type='text' value={this.props.expression} />
-        <button>OK</button>
-        </div>
+        <input type='text' value={this.state.newValue} />
+        <button onClick={this.updateValue.bind(this)}>OK</button>
+      </div>
     }
   }
 

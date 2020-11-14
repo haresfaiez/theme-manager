@@ -20,6 +20,16 @@ class ThemeConfiguration extends Component {
     return this.state.values[key];
   }
 
+  updateValue(id, newValue) {
+    this.state.values[id] = newValue;
+  }
+
+  updateConfigurationItem() {
+    return {
+      value: this.updateValue.bind(this)
+    };
+  }
+
   render() {
     return (
         <div>
@@ -29,6 +39,7 @@ class ThemeConfiguration extends Component {
                                id={id}
                                expression={expression}
                                valueOf={this.valueOf.bind(this)}
+                               update={this.updateConfigurationItem()}
                                />)
         }
         
