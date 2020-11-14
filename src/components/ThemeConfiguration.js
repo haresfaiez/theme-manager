@@ -6,22 +6,19 @@ class ThemeConfiguration extends Component {
     super();
 
     this.state = {
-      values: {
-        'colors.primary': '#000000'
-      },
-      items: [
-        {name: 'Primary font color', id: 'colors.primary'},
-        {name: 'Border', id: 'textfield.border', expression: 'solid {colors.primary}'}
-      ]
+      items: {
+        'colors.primary': { name: 'Primary font color', expression: '#000000' },
+        'textfield.border': { name: 'Border', expression: 'solid {colors.primary}'}
+      }
     };
   }
 
-  valueOf(key) {
-    return this.state.values[key];
+  valueOf(id) {
+    return this.state.items[id].expression;
   }
 
-  updateValue(id, newValue) {
-    this.state.values[id] = newValue;
+  updateValue(id, newExpression) {
+    this.state.items[id].expression = newExpression;
   }
 
   updateConfigurationItem() {
@@ -30,7 +27,9 @@ class ThemeConfiguration extends Component {
     };
   }
 
-  renderConfigurationItem({ id, name, expression}) {
+  renderConfigurationItem(id) {
+    const { name, expression} = this.state.items[id];
+
     return <ConfigurationItem
     name={name}
     id={id}
@@ -43,7 +42,7 @@ class ThemeConfiguration extends Component {
   render() {
     return (
         <div>
-        {this.state.items.map(this.renderConfigurationItem.bind(this))}
+        {Object.keys(this.state.items).map(this.renderConfigurationItem.bind(this))}
         </div>
     );
   }
