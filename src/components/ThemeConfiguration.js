@@ -11,10 +11,16 @@ class ThemeConfiguration extends Component {
       theme
     };
 
+    this.updateExpression = this.updateExpression.bind(this);
+
     this.evaluatedValue = theme.evaluatedValue.bind(theme);
     this.rawValue = theme.rawValue.bind(theme);
     this.getName = theme.getName.bind(theme);
-    this.updateExpression = theme.updateExpression.bind(theme);
+  }
+
+  updateExpression(id, newValue) {
+    this.state.theme.updateExpression.bind(this.state.theme)(id, newValue);
+    this.setState({ theme: this.state.theme });
   }
 
   renderConfigurationItem(id) {

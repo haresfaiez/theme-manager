@@ -5,10 +5,16 @@ class ConfigurationItem extends Component {
     super(props);
 
     this.state = {
-      editMode: false
+      editMode: false,
+      value: props.rawValue
     };
 
     this.switchMode = this.switchMode.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
   }
 
   switchMode() {
@@ -18,8 +24,8 @@ class ConfigurationItem extends Component {
   renderEditor() {
     if (this.state.editMode) {
       return <div>
-        <input type='text' value={this.props.rawValue} />
-        <button onClick={() => this.props.updateExpression(this.props.id, this.props.rawValue)}>OK</button>
+        <input type='text' value={this.state.value} onChange={this.handleChange} />
+        <button onClick={() => this.props.updateExpression(this.props.id, this.state.value)}>OK</button>
       </div>
     }
   }
