@@ -26,7 +26,7 @@ class ConfigurationItem extends Component {
   }
 
   updateValue() {
-    this.props.update.value(this.props.id, this.state.newValue);
+    this.props.update(this.props.id, this.state.newValue);
   }
 
   renderEditor() {

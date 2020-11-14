@@ -21,12 +21,6 @@ class ThemeConfiguration extends Component {
     this.state.items[id].expression = newExpression;
   }
 
-  updateConfigurationItem() {
-    return {
-      value: this.updateValue.bind(this)
-    };
-  }
-
   renderConfigurationItem(id) {
     const { name, expression} = this.state.items[id];
 
@@ -35,7 +29,7 @@ class ThemeConfiguration extends Component {
     id={id}
     expression={expression}
     valueOf={this.valueOf.bind(this)}
-    update={this.updateConfigurationItem()}
+    update={this.updateValue.bind(this)}
       />
   }
 
