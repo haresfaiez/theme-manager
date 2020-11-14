@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ConfigurationItem from './components/ConfigurationItem';
+import ThemeConfiguration from './components/ThemeConfiguration';
 
 const wrapper = document.getElementById('container');
-ReactDOM.render(<ConfigurationItem name='Primary font color' id='colors.primary' value='#000000'  />, wrapper);
+ReactDOM.render(<ThemeConfiguration />, wrapper);
