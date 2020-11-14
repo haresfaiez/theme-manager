@@ -5,9 +5,7 @@ class ConfigurationItem extends Component {
     super(props);
 
     this.state = {
-      editMode: false,
-      actualValue: this.interpretValue(props.valueOf, props),
-      newValue: props.expression || props.valueOf(props.id)
+      editMode: false
     };
 
     this.switchMode = this.switchMode.bind(this);
@@ -17,23 +15,11 @@ class ConfigurationItem extends Component {
     this.setState(() => ({ editMode: !this.state.editMode }));
   }
 
-  interpretValue(valueOf, { expression, id }) {
-    if (!expression) {
-      return valueOf(id);
-    }
-
-    return expression.replace(/{([^}]*)}/g, (id) => valueOf(id.replace(/({|})/g, '')));
-  }
-
-  updateValue() {
-    this.props.update(this.props.id, this.state.newValue);
-  }
-
   renderEditor() {
     if (this.state.editMode) {
       return <div>
-        <input type='text' value={this.state.newValue} />
-        <button onClick={this.updateValue.bind(this)}>OK</button>
+        <input type='text' value={this.props.rawValue} />
+        <button onClick={() => this.props.updateExpression(this.props.id, this.props.rawValue)}>OK</button>
       </div>
     }
   }
@@ -44,7 +30,7 @@ class ConfigurationItem extends Component {
         <div onClick={this.switchMode}>
           <div>
             <span>{this.props.name}:</span>
-            <span>{this.state.actualValue}</span>
+            <span>{this.props.evaluatedValue}</span>
           </div>
           <div>{this.props.id}</div>
         </div>
