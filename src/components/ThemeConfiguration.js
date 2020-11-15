@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ConfigurationItem from './ConfigurationItem';
-import Theme from './Theme';
+import Theme from '../model/Theme';
 import data from '../data';
 
 class ThemeConfiguration extends Component {
