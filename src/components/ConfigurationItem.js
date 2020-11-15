@@ -24,24 +24,36 @@ class ConfigurationItem extends Component {
   renderEditor() {
     if (this.state.editMode) {
       return <div>
-        <input type='text' value={this.state.value} onChange={this.handleChange} />
-        <button onClick={() => this.props.updateExpression(this.props.id, this.state.value)}>OK</button>
+        <div class='configuration-item--row'>
+          <div class='configuration-item--row-head'>Value:</div>
+          <div class='configuration-item--row-body'>
+            <input type='text' value={this.state.value} onChange={this.handleChange} />
+          </div>
+        </div>
+        <div class='configuration-item--row'>
+          <div class='configuration-item--row-head'>Type:</div>
+          <div class='configuration-item--row-body'><input type='radio' />text</div>
+          <div class='configuration-item--row-tail'>
+            <button onClick={() => this.props.updateExpression(this.props.id, this.state.value)}>OK</button>
+          </div>
+        </div>
       </div>
     }
   }
 
   render() {
     return (
-      <div>
-        <div onClick={this.switchMode}>
-          <div>
-            <span>{this.props.name}:</span>
-            <span>{this.props.evaluatedValue}</span>
+      <li className={this.state.editMode ? 'configuration-item--edit-mode' : 'configuration-item'}>
+        <div onClick={this.switchMode} class='configuration-item--row configuration-item--key'>
+          <div class='configuration-item--row-head--large'>
+            <span class='configuration-item--label'>{this.props.name}:</span>
+            <span><b>{this.props.evaluatedValue}</b></span>
           </div>
-          <div>{this.props.id}</div>
+          <div class='configuration-item--row-body'>{this.props.id}</div>
+          <div class='configuration-item--row-tail'>{this.state.editMode ? 'x' : ''}</div>
         </div>
         {this.renderEditor()}
-      </div>
+      </li>
     );
   }
 }

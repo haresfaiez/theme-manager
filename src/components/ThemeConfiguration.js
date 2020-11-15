@@ -32,16 +32,26 @@ class ThemeConfiguration extends Component {
 
   renderCategory(categoryId) {
     return <div>
-      <div>{this.state.theme.categoryName(categoryId)}</div>
-      {this.state.theme.configurationsIds(categoryId).map(this.renderConfigurationItem.bind(this, categoryId))}
+      <div>
+        <h2>{this.state.theme.categoryName(categoryId)}</h2>
+      </div>
+      <div>
+      <ul>
+        {this.state.theme.configurationsIds(categoryId).map(this.renderConfigurationItem.bind(this, categoryId))}
+      </ul>
+      </div>
     </div>;
   }
 
   render() {
     return (
-        <div>
-        {this.state.theme.configurationCategoriesIds().map(this.renderCategory.bind(this))}
+      <main>
+        <h1>simple theme editor</h1>
+        <div class="configuration-list">
+          {this.state.theme.configurationCategoriesIds().map(this.renderCategory.bind(this))}
         </div>
+        <div><button>Save</button></div>
+      </main>
     );
   }
 }
