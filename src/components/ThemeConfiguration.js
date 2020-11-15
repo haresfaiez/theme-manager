@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ConfigurationItem from './ConfigurationItem';
 import Theme from './Theme';
+import data from '../data';
 
 class ThemeConfiguration extends Component {
   constructor() {
     super();
 
-    const theme = new Theme();
+    const theme = new Theme(data);
     this.state = {
       theme
     };
