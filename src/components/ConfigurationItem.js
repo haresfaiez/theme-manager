@@ -6,7 +6,8 @@ class ConfigurationItem extends Component {
 
     this.state = {
       editMode: false,
-      value: props.rawValue
+      value: props.rawValue,
+      hasUnit: ['em', 'rem', 'px'].includes(props.type)
     };
 
     this.switchMode = this.switchMode.bind(this);
@@ -46,13 +47,22 @@ class ConfigurationItem extends Component {
     }
   }
 
+  renderColorPreview() {
+    return <span class="color-preview" style={{background: this.props.evaluatedValue}} />
+  }
+
   render() {
     return (
       <li className={this.state.editMode ? 'configuration-item--edit-mode' : 'configuration-item'}>
         <div onClick={this.switchMode} class='configuration-item--row configuration-item--key'>
           <div class='configuration-item--row-head--large'>
-            <span class='configuration-item--label'>{this.props.name}:</span>
-            <span><b>{this.props.evaluatedValue}</b></span>
+            <span class='configuration-item--label'>
+              {this.props.name}{this.state.hasUnit ? ` (${this.props.type})`: ''}:
+            </span>
+            <span>
+              <b>{this.props.evaluatedValue}</b>
+              {this.props.type === 'color' ? this.renderColorPreview() : null}
+            </span>
           </div>
           <div class='configuration-item--row-body'>{this.props.id}</div>
           <div class='configuration-item--row-tail'>{this.state.editMode ? 'x' : ''}</div>

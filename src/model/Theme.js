@@ -20,6 +20,10 @@ class Theme {
     return this.configurations[categoryId].items[id].name;
   }
 
+  getType(categoryId, id) {
+    return this.configurations[categoryId].items[id].type;
+  }
+
   updateExpression(categoryId, id, newExpression) {
     this.configurations[categoryId].items[id].expression = newExpression;
   }

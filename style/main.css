@@ -78,3 +78,13 @@ button {
   display: flex;
   flex-direction: row-reverse;
 }
+
+/* Color preview */
+.color-preview {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  margin-left: 0.5em;
+  border: 2px solid gray;
+  border-radius: 0.2em;
+}
