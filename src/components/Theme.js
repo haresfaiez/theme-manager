@@ -1,4 +1,4 @@
-export default class Theme {
+class Theme {
 
   constructor(configurations) {
     this.configurations = configurations;
@@ -36,3 +36,5 @@ export default class Theme {
     return this.configurations[categoryId].items[id].expression;
   }
 }
+
+module.exports = Theme;
