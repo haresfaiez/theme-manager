@@ -21,6 +21,11 @@ class ConfigurationItem extends Component {
     this.setState(() => ({ editMode: !this.state.editMode }));
   }
 
+  save() {
+    this.props.updateExpression(this.state.value);
+    this.switchMode();
+  }
+
   renderEditor() {
     if (this.state.editMode) {
       return <div>
@@ -34,7 +39,7 @@ class ConfigurationItem extends Component {
           <div class='configuration-item--row-head'>Type:</div>
           <div class='configuration-item--row-body'><input type='radio' />text</div>
           <div class='configuration-item--row-tail'>
-            <button onClick={() => this.props.updateExpression(this.state.value)}>OK</button>
+            <button onClick={this.save.bind(this)}>OK</button>
           </div>
         </div>
       </div>
