@@ -22,11 +22,11 @@ class ThemeConfiguration extends Component {
 
   renderConfigurationItem(categoryId, id) {
     return <ConfigurationItem
-    id={id}
+    id={`${categoryId}.${id}`}
     name={this.state.theme.getName(categoryId, id)}
     rawValue={this.state.theme.rawValue(categoryId, id)}
     evaluatedValue={this.state.theme.evaluatedValue(categoryId, id)}
-    updateExpression={this.updateExpression.bind(this, categoryId)}
+    updateExpression={this.updateExpression.bind(this, categoryId, id)}
       />
   }
 

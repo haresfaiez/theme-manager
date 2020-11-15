@@ -34,7 +34,7 @@ class ConfigurationItem extends Component {
           <div class='configuration-item--row-head'>Type:</div>
           <div class='configuration-item--row-body'><input type='radio' />text</div>
           <div class='configuration-item--row-tail'>
-            <button onClick={() => this.props.updateExpression(this.props.id, this.state.value)}>OK</button>
+            <button onClick={() => this.props.updateExpression(this.state.value)}>OK</button>
           </div>
         </div>
       </div>
