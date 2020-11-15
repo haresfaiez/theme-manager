@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   colors: {
     name: 'General colors',
     items: {

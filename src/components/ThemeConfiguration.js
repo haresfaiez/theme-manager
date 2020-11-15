@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import ConfigurationItem from './ConfigurationItem';
 import Theme from '../model/Theme';
-import data from '../data';
+import Storage from '../model/Storage';
 
 class ThemeConfiguration extends Component {
   constructor() {
     super();
 
-    const theme = new Theme(data);
+    const storage = new Storage(window.localStorage, 'theme');
+    const theme  = storage.getTheme();
     this.state = {
+      storage,
       theme
     };
 
     this.updateExpression = this.updateExpression.bind(this);
+
+    this.saveTheme = storage.saveTheme.bind(storage, theme);
   }
 
   updateExpression(categoryId, id, newValue) {
@@ -50,7 +54,7 @@ class ThemeConfiguration extends Component {
         <div class="configuration-list">
           {this.state.theme.configurationCategoriesIds().map(this.renderCategory.bind(this))}
         </div>
-        <div><button>Save</button></div>
+        <div><button onClick={this.saveTheme}>Save</button></div>
       </main>
     );
   }
