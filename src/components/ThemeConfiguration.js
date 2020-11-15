@@ -13,30 +13,40 @@ class ThemeConfiguration extends Component {
 
     this.updateExpression = this.updateExpression.bind(this);
 
+    this.configurationCategoriesIds = theme.configurationCategoriesIds.bind(theme);
+    this.configurationsIds = theme.configurationsIds.bind(theme);
+    this.categoryName = theme.categoryName.bind(theme);
     this.evaluatedValue = theme.evaluatedValue.bind(theme);
     this.rawValue = theme.rawValue.bind(theme);
     this.getName = theme.getName.bind(theme);
   }
 
-  updateExpression(id, newValue) {
-    this.state.theme.updateExpression.bind(this.state.theme)(id, newValue);
+  updateExpression(categoryId, id, newValue) {
+    this.state.theme.updateExpression.bind(this.state.theme)(categoryId, id, newValue);
     this.setState({ theme: this.state.theme });
   }
 
-  renderConfigurationItem(id) {
+  renderConfigurationItem(categoryId, id) {
     return <ConfigurationItem
     id={id}
-    name={this.getName(id)}
-    rawValue={this.rawValue(id)}
-    evaluatedValue={this.evaluatedValue(id)}
-    updateExpression={this.updateExpression}
+    name={this.getName(categoryId, id)}
+    rawValue={this.rawValue(categoryId, id)}
+    evaluatedValue={this.evaluatedValue(categoryId, id)}
+    updateExpression={this.updateExpression.bind(this, categoryId)}
       />
+  }
+
+  renderCategory(categoryId) {
+    return <div>
+      <div>{this.categoryName(categoryId)}</div>
+      {this.configurationsIds(categoryId).map(this.renderConfigurationItem.bind(this, categoryId))}
+    </div>;
   }
 
   render() {
     return (
         <div>
-        {this.state.theme.configurationsIds().map(this.renderConfigurationItem.bind(this))}
+        {this.configurationCategoriesIds().map(this.renderCategory.bind(this))}
         </div>
     );
   }
