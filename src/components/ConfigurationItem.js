@@ -1,66 +1,24 @@
 import React, { Component } from 'react';
+import ConfigurationItemEditor from './ConfigurationItemEditor';
 
 class ConfigurationItem extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
-    const unitTypes = ['em', 'rem', 'px'];
     this.state = {
-      editMode: false,
-      value: props.rawValue,
-      hasUnit: unitTypes.includes(props.type),
-      types: ['text', ...unitTypes, 'color']
+      editMode: false
     };
 
     this.switchMode = this.switchMode.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
   }
 
   switchMode() {
     this.setState(() => ({ editMode: !this.state.editMode }));
   }
 
-  save() {
-    this.props.updateExpression(this.state.value);
+  save(newValue) {
+    this.props.updateExpression(newValue);
     this.switchMode();
-  }
-
-  renderEditor() {
-    if (this.state.editMode) {
-      return <div>
-        <div class='configuration-item--row'>
-          <div class='configuration-item--row-head'>Value:</div>
-          <div class='configuration-item--row-body'>
-            <input type='text' value={this.state.value} onChange={this.handleChange} />
-          </div>
-        </div>
-        <div class='configuration-item--row'>
-          <div class='configuration-item--row-head'>Type:</div>
-          <div class='configuration-item--row-body'>
-            <ul>
-            {this.state.types.map(eachType =>
-                                  <li>
-                                  <input
-                                  type='radio'
-                                  name={this.props.id + '-type'}
-                                  value={eachType}
-                                  checked={this.props.type === eachType}
-                                  />
-                                  <span>{eachType}</span>
-                                  </li>
-                                 )}
-            </ul>
-          </div>
-          <div class='configuration-item--row-tail'>
-            <button onClick={this.save.bind(this)}>OK</button>
-          </div>
-        </div>
-      </div>
-    }
   }
 
   renderColorPreview() {
@@ -83,7 +41,14 @@ class ConfigurationItem extends Component {
           <div class='configuration-item--row-body'>{this.props.id}</div>
           <div class='configuration-item--row-tail'>{this.state.editMode ? 'x' : ''}</div>
         </div>
-        {this.renderEditor()}
+        {this.state.editMode ?
+         <ConfigurationItemEditor
+           id={this.props.id}
+           rawValue={this.props.rawValue}
+           type={this.props.type}
+           save={this.save.bind(this)}
+           />
+         : ''}
       </li>
     );
   }
