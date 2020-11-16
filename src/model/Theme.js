@@ -21,7 +21,7 @@ class Theme {
   }
 
   getType(categoryId, id) {
-    return this.configurations[categoryId].items[id].type;
+    return this.configurations[categoryId].items[id].type || 'text';
   }
 
   updateExpression(categoryId, id, newExpression) {

@@ -74,6 +74,14 @@ button {
   flex: 1;
 }
 
+.configuration-item--row-body ul {
+  display: flex;
+}
+
+.configuration-item--row-body ul li {
+  margin-right: 1em;
+}
+
 .configuration-item--row-tail {
   display: flex;
   flex-direction: row-reverse;

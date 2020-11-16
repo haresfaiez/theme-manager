@@ -4,10 +4,12 @@ class ConfigurationItem extends Component {
   constructor(props) {
     super(props);
 
+    const unitTypes = ['em', 'rem', 'px'];
     this.state = {
       editMode: false,
       value: props.rawValue,
-      hasUnit: ['em', 'rem', 'px'].includes(props.type)
+      hasUnit: unitTypes.includes(props.type),
+      types: ['text', ...unitTypes, 'color']
     };
 
     this.switchMode = this.switchMode.bind(this);
@@ -38,7 +40,21 @@ class ConfigurationItem extends Component {
         </div>
         <div class='configuration-item--row'>
           <div class='configuration-item--row-head'>Type:</div>
-          <div class='configuration-item--row-body'><input type='radio' />text</div>
+          <div class='configuration-item--row-body'>
+            <ul>
+            {this.state.types.map(eachType =>
+                                  <li>
+                                  <input
+                                  type='radio'
+                                  name={this.props.id + '-type'}
+                                  value={eachType}
+                                  checked={this.props.type === eachType}
+                                  />
+                                  <span>{eachType}</span>
+                                  </li>
+                                 )}
+            </ul>
+          </div>
           <div class='configuration-item--row-tail'>
             <button onClick={this.save.bind(this)}>OK</button>
           </div>
