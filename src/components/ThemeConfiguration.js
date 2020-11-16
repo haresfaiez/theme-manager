@@ -19,8 +19,8 @@ class ThemeConfiguration extends Component {
     this.saveTheme = storage.saveTheme.bind(storage, theme);
   }
 
-  updateExpression(categoryId, id, newValue) {
-    this.state.theme.updateExpression.bind(this.state.theme)(categoryId, id, newValue);
+  updateExpression(categoryId, id, newValue, newType) {
+    this.state.theme.updateExpression.bind(this.state.theme)(categoryId, id, newValue, newType);
     this.setState({ theme: this.state.theme });
   }
 

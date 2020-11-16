@@ -7,19 +7,25 @@ class ConfigurationItemEditor extends Component {
     const unitTypes = ['em', 'rem', 'px'];
     this.state = {
       value: props.rawValue,
+      editedType: props.type,
       hasUnit: unitTypes.includes(props.type),
       types: ['text', ...unitTypes, 'color']
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleTypeChange = this.handleTypeChange.bind(this);
   }
 
   handleChange(event) {
     this.setState({value: event.target.value});
   }
 
+  handleTypeChange(event) {
+    this.setState({editedType: event.target.value});
+  }
+
   save() {
-    this.props.save(this.state.value);
+    this.props.save(this.state.value, this.state.editedType);
   }
 
   renderTypeOption(type) {
@@ -28,7 +34,8 @@ class ConfigurationItemEditor extends Component {
         type='radio'
         name={this.props.id + '-type'}
         value={type}
-        checked={this.props.type === type}
+        checked={this.state.editedType === type}
+        onChange={this.handleTypeChange}
         />
       <span>{type}</span>
     </li>

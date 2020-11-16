@@ -16,8 +16,8 @@ class ConfigurationItem extends Component {
     this.setState(() => ({ editMode: !this.state.editMode }));
   }
 
-  save(newValue) {
-    this.props.updateExpression(newValue);
+  save(newValue, newType) {
+    this.props.updateExpression(newValue, newType);
     this.switchMode();
   }
 

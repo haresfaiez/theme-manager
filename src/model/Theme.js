@@ -24,8 +24,10 @@ class Theme {
     return this.configurations[categoryId].items[id].type || 'text';
   }
 
-  updateExpression(categoryId, id, newExpression) {
-    this.configurations[categoryId].items[id].expression = newExpression;
+  updateExpression(categoryId, id, newExpression, newType) {
+    const edited = this.configurations[categoryId].items[id];
+    edited.expression = newExpression;
+    edited.type = newType;
   }
 
   evaluatedValue(categoryId, id) {
