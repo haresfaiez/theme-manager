@@ -9,7 +9,8 @@ class ConfigurationItemEditor extends Component {
       value: props.rawValue,
       editedType: props.type,
       hasUnit: unitTypes.includes(props.type),
-      types: ['text', ...unitTypes, 'color']
+      types: ['text', ...unitTypes, 'color'],
+      errors: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,7 +26,12 @@ class ConfigurationItemEditor extends Component {
   }
 
   save() {
-    this.props.save(this.state.value, this.state.editedType);
+    const errors = this.props.validate(this.state.value, this.state.editedType);
+    if (!errors.length) {
+      this.props.save(this.state.value, this.state.editedType);
+    } else {
+      this.setState({ errors });
+    }
   }
 
   renderTypeOption(type) {
@@ -59,6 +65,9 @@ class ConfigurationItemEditor extends Component {
         <div class='configuration-item--row-tail'>
           <button onClick={this.save.bind(this)}>OK</button>
         </div>
+      </div>
+      <div class='configuration-item--row errors'>
+      {this.state.errors.map(message => <li>{message}</li>)}
       </div>
     </div>
   }

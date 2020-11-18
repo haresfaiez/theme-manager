@@ -47,6 +47,7 @@ class ConfigurationItem extends Component {
            rawValue={this.props.rawValue}
            type={this.props.type}
            save={this.save.bind(this)}
+           validate={this.props.validate}
            />
          : ''}
       </li>

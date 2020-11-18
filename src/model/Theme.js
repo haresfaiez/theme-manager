@@ -41,6 +41,10 @@ class Theme {
   rawValue(categoryId, id) {
     return this.configurations[categoryId].items[id].expression;
   }
+
+  validate(value, type) {
+    return [];
+  }
 }
 
 module.exports = Theme;
