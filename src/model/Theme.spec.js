@@ -96,5 +96,10 @@ describe('Theme', () => {
       const actual = new Theme().validate('30', 'rem');
       expect(actual).toEqual([]);
     });
+
+    it('accepts calc expression', () => {
+      const actual = new Theme().validate('calc(30*2)', 'rem');
+      expect(actual).toEqual([]);
+    });
   });
 });

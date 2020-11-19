@@ -59,6 +59,10 @@ class Theme {
   }
 
   validateNumber(rawValue) {
+    if (RegExp(/^calc(.+)$/).test(rawValue)) {
+      return [];
+    }
+
     const value = Number(rawValue);
     if(Number.isNaN(value)) {
       return [`Failed to save value! "${rawValue}" is not a valid number.`];
