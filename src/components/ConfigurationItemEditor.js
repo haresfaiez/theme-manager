@@ -51,7 +51,12 @@ class ConfigurationItemEditor extends Component {
       <div class='configuration-item--row'>
         <div class='configuration-item--row-head'><label for={this.props.id+'-value'}>Value:</label></div>
         <div class='configuration-item--row-body'>
-          <input type='text' value={this.state.value} onChange={this.handleChange} id={this.props.id+'-value'} />
+          <input
+            type={this.type === 'color' ? 'color' : 'text' }
+            value={this.state.value}
+            onChange={this.handleChange}
+            id={this.props.id+'-value'}
+          />
         </div>
       </div>
       <div class='configuration-item--row'>
