@@ -11,7 +11,8 @@ class ThemeConfiguration extends Component {
     const theme  = storage.getTheme();
     this.state = {
       storage,
-      theme
+      theme,
+      collapsedCategories: {}
     };
 
     this.updateExpression = this.updateExpression.bind(this);
@@ -22,6 +23,13 @@ class ThemeConfiguration extends Component {
   updateExpression(categoryId, id, newValue, newType) {
     this.state.theme.updateExpression.bind(this.state.theme)(categoryId, id, newValue, newType);
     this.setState({ theme: this.state.theme });
+  }
+
+  toggleCategory(categoryId) {
+    const oldState = !!this.state.collapsedCategories[categoryId];
+    const newState = !oldState;
+    const newCollapsedCategories = Object.assign(this.state.collapsedCategories, { [categoryId]: newState });
+    this.setState({ collapsedCategories: newCollapsedCategories });
   }
 
   renderConfigurationItem(categoryId, id) {
@@ -38,14 +46,21 @@ class ThemeConfiguration extends Component {
 
   renderCategory(categoryId) {
     return <div>
-      <div>
+      <div class="configuration-category--header" onClick={this.toggleCategory.bind(this, categoryId)}>
+        <span class="configuration-category--knob">
+           {this.state.collapsedCategories[categoryId] ? '►' : '▼'}
+        </span>
         <h2>{this.state.theme.categoryName(categoryId)}</h2>
       </div>
-      <div>
-      <ul>
-        {this.state.theme.configurationsIds(categoryId).map(this.renderConfigurationItem.bind(this, categoryId))}
-      </ul>
-      </div>
+      {(!this.state.collapsedCategories[categoryId]) &&
+        <div>
+          <ul>
+            {this.state.theme
+             .configurationsIds(categoryId)
+             .map(this.renderConfigurationItem.bind(this, categoryId))}
+          </ul>
+       </div>
+      }
     </div>;
   }
 

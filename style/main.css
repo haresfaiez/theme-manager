@@ -32,6 +32,21 @@ button {
   border-radius: 0.2em;
 }
 
+/* Configuration category */
+.configuration-category--header {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.configuration-category--header:hover {
+  color: #333;
+}
+
+.configuration-category--knob {
+  width: 1.5em;
+}
+
 /* Configuration list */
 .configuration-list {
   margin: 3em 0;
@@ -59,7 +74,7 @@ button {
 
 .configuration-item--row {
   display: flex;
-  margin: 1em 0;
+  margin: 1em 0 1em 1.5em;
 }
 
 .configuration-item--row-head {
