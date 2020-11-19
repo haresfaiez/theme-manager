@@ -9,7 +9,8 @@ class ConfigurationItemEditor extends Component {
       value: props.rawValue,
       editedType: props.type,
       types,
-      errors: []
+      errors: [],
+      validator: null
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -18,6 +19,13 @@ class ConfigurationItemEditor extends Component {
 
   handleChange(event) {
     this.setState({value: event.target.value});
+
+    window.clearTimeout(this.state.validator);
+    const validator = window.setTimeout(() => {
+      debugger;
+      this.setState({ errors: this.props.validate(this.state.value, this.state.editedType) });
+    }, 300);
+    this.setState({ validator });
   }
 
   handleTypeChange(event) {
