@@ -49,9 +49,9 @@ class ConfigurationItemEditor extends Component {
   render() {
     return <div>
       <div class='configuration-item--row'>
-        <div class='configuration-item--row-head'>Value:</div>
+        <div class='configuration-item--row-head'><label for={this.props.id+'-value'}>Value:</label></div>
         <div class='configuration-item--row-body'>
-          <input type='text' value={this.state.value} onChange={this.handleChange} />
+          <input type='text' value={this.state.value} onChange={this.handleChange} id={this.props.id+'-value'} />
         </div>
       </div>
       <div class='configuration-item--row'>
