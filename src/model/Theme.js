@@ -25,21 +25,35 @@ class Theme {
   }
 
   updateExpression(categoryId, id, newExpression, newType) {
-    const edited = this.configurations[categoryId].items[id];
+    let category = this.configurations[categoryId];
+    if (!category) {
+      category = this.configurations[categoryId] = {};
+    }
+
+    const edited = category.items[id];
     edited.expression = newExpression;
     edited.type = newType;
   }
 
   evaluatedValue(categoryId, id) {
+    const category = this.configurations[categoryId];
+    if (!category || !category.items[id] || !category.items[id].expression) {
+      return '';
+    }
+
     return this.rawValue(categoryId, id)
       .replace(/{([^}]*)}/g, (reference) => {
         const id = reference.replace(/({|})/g, '').split('.');
-        return this.evaluatedValue(id[0], id[1]);
+        return this.evaluatedValue(id[0], id[1]) || reference;
       });
   }
 
   rawValue(categoryId, id) {
-    return this.configurations[categoryId].items[id].expression;
+    const category = this.configurations[categoryId];
+    if (!category || !category.items[id] || !category.items[id].expression) {
+      return '';
+    }
+    return category.items[id].expression;
   }
 
   validateColor(value) {

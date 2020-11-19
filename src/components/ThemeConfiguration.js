@@ -38,7 +38,7 @@ class ThemeConfiguration extends Component {
     name={this.state.theme.getName(categoryId, id)}
     type={this.state.theme.getType(categoryId, id)}
     rawValue={this.state.theme.rawValue(categoryId, id)}
-    evaluatedValue={this.state.theme.evaluatedValue(categoryId, id)}
+    evaluatedValue={this.state.theme.evaluatedValue(categoryId, id) || this.state.theme.rawValue(categoryId, id)}
     updateExpression={this.updateExpression.bind(this, categoryId, id)}
     validate={this.state.theme.validate.bind(this.state.theme)}
       />
