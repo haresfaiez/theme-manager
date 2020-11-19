@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import ConfigurationItemEditor from './ConfigurationItemEditor';
+import { unitTypes } from '../model/Types';
 
 class ConfigurationItem extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      editMode: false
+      editMode: false,
+      hasUnit: unitTypes.includes(props.type)
     };
 
     this.switchMode = this.switchMode.bind(this);

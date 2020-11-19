@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
+import { types } from '../model/Types';
 
 class ConfigurationItemEditor extends Component {
   constructor(props) {
     super(props);
 
-    const unitTypes = ['em', 'rem', 'px'];
     this.state = {
       value: props.rawValue,
       editedType: props.type,
-      hasUnit: unitTypes.includes(props.type),
-      types: ['text', ...unitTypes, 'color'],
+      types,
       errors: []
     };
 
