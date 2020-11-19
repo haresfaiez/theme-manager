@@ -4,6 +4,13 @@ main {
   padding: 2%;
 }
 
+@media only screen and (max-width: 1280px) {
+  main {
+    width: 100%;
+  }
+}
+
+
 ul {
   list-style-type: none;
   padding: 0;
