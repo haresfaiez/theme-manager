@@ -12,6 +12,18 @@ describe('Theme', () => {
     expect(theme.getName('a', 'b')).toEqual('expected');
   });
 
+  describe('evaluated value', () => {
+    it('should evaluate references recursively', () => {
+      const data = { a: { items: {
+        'b': { expression: 'expected' },
+        'c': { expression: '{a.b}' },
+        'd': { expression: '{a.c}' }
+      }}};
+      const actual = new Theme(data).evaluatedValue('a', 'd');
+      expect(actual).toEqual('expected');
+    });
+  });
+
   describe('getType', () => {
     it('retrieves the type of an item', () => {
       const theme = new Theme({ a: { items: { b : { name: 'expected', type: 'color' } } } });

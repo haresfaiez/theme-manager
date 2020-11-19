@@ -34,7 +34,7 @@ class Theme {
     return this.rawValue(categoryId, id)
       .replace(/{([^}]*)}/g, (reference) => {
         const id = reference.replace(/({|})/g, '').split('.');
-        return this.rawValue(id[0], id[1]);
+        return this.evaluatedValue(id[0], id[1]);
       });
   }
 
