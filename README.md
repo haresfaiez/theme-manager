@@ -10,7 +10,7 @@ To test, run `npm test`.
 Open `index.html`
 
 
-## Assumpitons
+## Assumptions
   * Configuration has two levels. The first for configurations categories
     and the second for configurations items.
   * Browser is not IE
